@@ -1,4 +1,4 @@
-Chat-space DB設計　マークダウン
+
 
 # chat-space DB設計
 ## usersテーブル
@@ -7,9 +7,9 @@ Chat-space DB設計　マークダウン
 |user_id|integer|null: false
 |email|string|null: false|
 |password|string|null: false|
-|username|string|null: false|
+|name|string|null: false|
 ### Association
-- has_many  :messages,  through:  :users_messages
+- has_many  :messages,  through:  :user_group
 - has_many :users_groups
 
 ## messageテーブル
@@ -32,7 +32,7 @@ Chat-space DB設計　マークダウン
 |group_name|text|null: false|
 ### Association
 - has_many :messages
-- has_many  :messages,  through:  :users_messages
+- has_many  :messages,  through:  :user_group
 
 ## users_groupsテーブル
 |Column|Type|Options|
