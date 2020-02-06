@@ -1,5 +1,3 @@
-Chat-space DB設計　マークダウン
-
 # chat-space DB設計
 ## usersテーブル
 |Column|Type|Options|
