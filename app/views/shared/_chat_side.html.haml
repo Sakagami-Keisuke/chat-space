@@ -1,0 +1,25 @@
+
+
+.chat-side
+  .side-header
+    .side-header__box
+      %p.side-header__box__user-name 
+        sakagami
+      %ul.side-header__box__menu
+        %li.side-header__box__edit__user 
+          = link_to"#" do
+            = icon("fa","edit")
+        %li.side-header__box__new__group
+          = link_to"#" do
+            = icon("fa","cog")
+
+    
+
+
+  .groups
+    = link_to"#",class:"group"do
+      .group
+        %p.group__group-name グループ名
+        %p.group__latest-message まだメッセージがありません
+  
+    
