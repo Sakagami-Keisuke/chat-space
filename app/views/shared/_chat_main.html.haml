@@ -1,0 +1,33 @@
+
+
+.chat-main
+  .main-header
+    .left-box
+      %P.left-box__current-group グループ名
+      %ul.left-box__member-list 
+        %li.left-box__member-list__member Menber：
+        %li.left-box__member-list__member sakagami
+        %li.left-box__member-list__member jirou
+
+    .main-header__edit-btn edit
+  .messages
+    .message 
+      .message__upper-info
+        %p.message__upper-info__talker sakagami
+        %p.message__upper-info__date
+      %p.message__text アイウエオ
+
+  .form
+    %form.new_message
+      .input-box
+        %input{type: "text", class: "input-box__text", placeholder: "type a message"}
+        %label{class: "input-box__image"}
+          = icon('fa','image')
+          %input{type: "file", class: "input-box__image__file"}
+        %input{type: "submit", class:"submit-btn"}
+
+        
+
+
+
+
