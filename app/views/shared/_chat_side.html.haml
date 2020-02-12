@@ -3,25 +3,20 @@
 .chat-side
   .side-header
     .side-header__box
-      %p.side-header__box__user-name 
-        current_user.name
-      %ul.side-header__box__menu
-        %li.side-header__box__edit__user 
-          = link_to"#" do
-            = icon("fa","edit")
-        %li.side-header__box__new__group
-          = link_to edit_user_path(current_user) do
-            = icon("fa","cog", class: "icon")
-
-    
-
+      current_user.name
+      .side-header__box__menu
+        = link_to new_group_path do
+          %i.fa.fa-pencil-square-o.header-items__icons--pen
+        = link_to edit_user_path(current_user.id) do
+          %i.fa.fa-cog.header-items__icons--cog
 
   .groups
-    = link_to"#",class:"group"do
+    - current_user.groups.each do |group|
       .group
-        %p.group__group-name グループ名
-        %p.group__latest-message まだメッセージがありません
-        %p.group__group-name グループ名
-        %p.group__latest-message まだメッセージがありません
+        = link_to 'edit_group_path' do
+          .group__name
+            = group.name
+          .group__message
+            メッセージはまだありません。
   
     
