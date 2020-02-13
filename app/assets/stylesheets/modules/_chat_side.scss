@@ -13,23 +13,25 @@
     display: flex;
     align-items: center;
 
-    &__box {
+    .header__name{
       display: flex;
       justify-content: space-between;
       width: 100%;
       font-weight: bold;
-      background-color:#253141;
-
-      &__menu{
-        display: flex;
-        
-        .header-items__icons--pen{
+      background-color:#253141
+    }
+    .header__lists{
+      display: flex;
+      list-style: none;
+      .list_edit{
+        a {
           color: white;
         }
-
-        .header-items__icons--cog{
+      }
+      .list_cog{
+        a {
           color: white;
-        }
+      }
       }
     }
   }
@@ -43,11 +45,13 @@
     .group{
       text-decoration: none;
       margin-bottom: 40px;
+    
 
       .group__name {
         font-size: 15px;
         color: white;
         margin-bottom: 5px;
+        text-decoration: none;
       }
       .group__message {
         font-size: 11px;

@@ -3,29 +3,45 @@
 .chat-main
   .main-header
     .left-box
-      %P.left-box__current-group グループ名
+      %P.left-box__current-group
+        = @group.name
       %ul.left-box__member-list 
         Member:
-        %li.left-box__member-list__member sakagami
-        %li.left-box__member-list__member jirou
+        - @group.users.each do |user|
+          %li.left-box__member-list__member
+            = user.name
+    -#  インスタンス変数に格納されているテーブル情報のキーの値呼び出し
 
-    .main-header__edit-btn edit
+    = link_to edit_group_path(@group) do
+      .edit-box
+        Edit
+  -#  prefix名＋_path+(@group)←renderメソッドの変数と一致
+
   .messages
-    .message 
-      .message__upper-info
-        %p.message__upper-info__talker sakagami
-        %p.message__upper-info__date
-      %p.message__text アイウエオ
+    = render @messages
+    
+  -# .messages
+  -#   = render partial: 'message', collection: @messages
+  
+  -# .messages
+  -#   - @messages.each do |message|
+  -#     = render partial: "message", locals: { message: message }
 
   .form
-    %form.new_message
-      .input-box
-        %input{type: "text", class: "input-box__text", placeholder: "type a message"}
-        %label{class: "input-box__image"}
-          = icon('fa','image')
-          %input{type: "file", class: "input-box__image__file"}
-        %input{type: "submit",value:"Send", class:"submit-btn"}
-          　
+    = form_for [@group, @message] do |f|
+
+      = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+
+      .form__mask
+
+        = f.label :image, class: 'form__mask__image' do
+
+          = icon('fa', 'image', class: 'icon')
+
+          = f.file_field :image, class: 'hidden'
+          
+      = f.submit 'Send', class: 'form__submit'
+    
         
 
 
