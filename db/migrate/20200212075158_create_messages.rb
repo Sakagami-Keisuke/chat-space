@@ -9,3 +9,5 @@ class CreateMessages < ActiveRecord::Migration[5.0]
     end
   end
 end
+
+# rm -rf db/migrate/20200212061121_create_messages.rb 
