@@ -62,5 +62,6 @@ $(function(){
     })
     .always(function (data) {
       $('.form__submit').prop('disabled', false);
-  })
+   })
+  });
 });
