@@ -1,12 +1,10 @@
 
-
-//自動更新⑴表示されているメッセージのHTMLにid情報を追加  メッセージ全体にidを付与。   ※#{message.id}はjbuilderファイルで定義している
-.message{"data-message-id": "#{message.id}"}
+.message{data: {message: {id: message.id}}}
   .upper-message
     .upper-message__user-name
       = message.user.name
     .upper-message__date
-      = message.created_at.strftime("%Y年%m月%d日 %H時%M分")
+      = message.created_at.strftime("%Y/%m/%d %H:%M")
   .lower-message
     - if message.content.present?
       %p.lower-message__content

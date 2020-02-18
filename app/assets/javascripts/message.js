@@ -1,52 +1,34 @@
 $(function(){
-
-    function buildHTML(message){
-      if ( message.image ) {
-        var html =
-          `<div class="message" data-message-id=${message.id}>
-            <div class="upper-message">
-              <div class="upper-message__user-name">
-                ${message.user_name}
-              </div>
-              <div class="upper-message__date">
-                ${message.created_at}
-              </div>
+  function buildHTML(message){
+    image = ( message.image ) ? `<img class="lower-message__image" src=${message.image} >` : ""; 
+    var html = ` <div class="message" data-message-id="${message.id}">
+          <div class="upper-message">
+            <div class="upper-message__user-name">
+              ${message.user_name}
             </div>
-            <div class="lower-message">
-              <p class="lower-message__content">
-                ${message.content}
-              </p>
-              </div>
-              <img src=${message.image} >
-          </div>`
-        return html;
-      } else {
-        var html =
-        `<div class="message" data-message-id=${message.id}>
-            <div class="upper-message">
-              <div class="upper-message__user-name">
-                ${message.user_name}
-              </div>
-              <div class="upper-message__date">
-                ${message.created_at}
-              </div>
+            <div class="upper-message__date">
+              ${message.created_at}
             </div>
-            <div class="lower-message">
-              <p class="lower-message__content">
-                ${message.content}
-              </p>
-            </div>
-          </div>`
-        return html;
-      };
+          </div>
+          <div class="lower-message">
+            <p class="lower-message__content">
+              ${message.content}
+            </p>
+            ${image}
+          </div>
+        </div>`
+    return html; 
   }
 
+
+
+
     $('#new_message').on('submit', function(e){
-      // console.log('OK');                            // イベントが発火したときにAjaxを使用して、messages#createが動く
+      // console.log('OK');                            
       e.preventDefault();
-      var formData = new FormData(this);            // イベントが発火したときに Ajaxを使用して、messagesコントローラのcreateアクションが動く
-      var url = $(this).attr('action');             // onメソッドの内部では、$(this)と書くことでonメソッドを利用しているノードのオブジェクトが参照されます。つまり、今回の場合はform要素自体ということになります。
-      $.ajax({                                      // attrメソッドによって、引数に指定した属性の値を取得することができます。今回は引数に'action'を指定しているので、form要素のaction属性の値が取得できます。検証で見ると"action="/groups/:id番号/messagesとなっており、必要なパスとなることがわかります。
+      var formData = new FormData(this);            
+      var url = $(this).attr('action');             
+      $.ajax({                                      
         url: url,
         type: "POST",
         data: formData,
@@ -57,8 +39,8 @@ $(function(){
       .done(function(data){
         // console.log(data)
         var html = buildHTML(data);
-        $('.messages').append(html);                   // 受け取ったHTMLを、appendメソッドによって.messagesというクラスが適用されているdiv要素の子要素の一番最後に追加
-        $('form')[0].reset();                          // フォームを空にする
+        $('.messages').append(html);                 
+        $('form')[0].reset();                         
         $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
       })
       .fail(function(){
@@ -67,7 +49,43 @@ $(function(){
       .always(function (data) {
         $('.form__submit').prop('disabled', false);
       })
-
-
     });
+
+
+
+  let reloadMessages = function () {
+
+    let last_message_id = $('.message:last').data("message-id");        
+    console.log(last_message_id)
+    if (window.location.href.match(/\/groups\/\d+\/messages/)){          
+      
+                                                                        
+      $.ajax({                                                          
+        url: "api/messages",                                             
+        type: 'GET',                                                      
+        dataType: 'json',                                             
+        data: {last_id: last_message_id},                                 
+        contentType: false
+      }) 
+      .done(function (messages) { 
+        console.log(messages)                                       
+        let insertHTML = '';                                          
+        messages.forEach(function (message) {   
+          if (message.id > last_message_id) {                      
+            insertHTML = buildHTML(message);                           
+            $('.messages').append(insertHTML);                                                      
+            $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');    
+          }
+        });
+      })
+      .fail(function(){
+        alert('メッセージの送信を失敗しました');
+      });
+    } else {
+      console.log("aaa")
+      clearInterval(reloadMessages)
+    }
+  }
+    setInterval(reloadMessages, 7000);
+
 });
