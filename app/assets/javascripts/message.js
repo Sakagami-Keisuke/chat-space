@@ -24,7 +24,6 @@ $(function(){
 
 
     $('#new_message').on('submit', function(e){
-      // console.log('OK');                            
       e.preventDefault();
       var formData = new FormData(this);            
       var url = $(this).attr('action');             
@@ -37,7 +36,6 @@ $(function(){
         contentType: false
       })
       .done(function(data){
-        // console.log(data)
         var html = buildHTML(data);
         $('.messages').append(html);                 
         $('form')[0].reset();                         
@@ -56,7 +54,6 @@ $(function(){
   let reloadMessages = function () {
 
     let last_message_id = $('.message:last').data("message-id");        
-    console.log(last_message_id)
     if (window.location.href.match(/\/groups\/\d+\/messages/)){          
       
                                                                         
@@ -67,8 +64,7 @@ $(function(){
         data: {last_id: last_message_id},                                 
         contentType: false
       }) 
-      .done(function (messages) { 
-        console.log(messages)                                       
+      .done(function (messages) {                                 
         let insertHTML = '';                                          
         messages.forEach(function (message) {   
           if (message.id > last_message_id) {                      
@@ -82,7 +78,6 @@ $(function(){
         alert('メッセージの送信を失敗しました');
       });
     } else {
-      console.log("aaa")
       clearInterval(reloadMessages)
     }
   }
