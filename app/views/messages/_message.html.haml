@@ -1,4 +1,7 @@
-.message
+
+
+//自動更新⑴表示されているメッセージのHTMLにid情報を追加  メッセージ全体にidを付与。   ※#{message.id}はjbuilderファイルで定義している
+.message{"data-message-id": "#{message.id}"}
   .upper-message
     .upper-message__user-name
       = message.user.name

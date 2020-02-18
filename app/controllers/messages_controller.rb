@@ -6,13 +6,17 @@ class MessagesController < ApplicationController
     @messages = @group.messages.includes(:user)
   end
 
+
+
   def create
     @message = @group.messages.new(message_params)
-    if @message.save
-      respond_to do |format|
-        format.html { redirect_to group_messages_path, notice: "メッセージを送信しました" }
-        format.json
+    if @message.save                                      # 非同期通信 messagesコントローラーの#createアクションでメッセージを保存し、respond_toを使用してJSON形式のリクエストに対してのレスポンスを返せるようにする
+      respond_to do |format|                               # json形式で来たリクエストに対してjson形式のレスポンスを返すための記述を行います。respond_toメソッドを利用すると、フォーマットに応じたレスポンスを作成
+        format.html { redirect_to "group_messages_path(params[:group_id])" }
+        format.json                                         # この後、対応するcreate.json.jbuilderを作成することで、レスポンスをjson形式で返すことができます。
       end
+
+
     else
       @messages = @group.messages.includes(:user)
       flash.now[:alert] = 'メッセージを入力してください。'
@@ -30,3 +34,6 @@ class MessagesController < ApplicationController
     @group = Group.find(params[:group_id])
   end
 end
+
+
+
