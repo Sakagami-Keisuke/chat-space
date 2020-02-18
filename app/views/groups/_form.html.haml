@@ -5,16 +5,13 @@
       %ul
         - group.errors.full_messages.each do |message|
           %li= message
-
+          
   .chat-group-form__field
     .chat-group-form__field--left
       = f.label :name, class: 'chat-group-form__label'
     .chat-group-form__field--right
       = f.text_field :name, class: 'chat__group_name chat-group-form__input', placeholder: 'グループ名を入力してください'
-  
-  
-
-
+  .chat-group-form__field.clearfix
     .chat-group-form__field--left
       %label.chat-group-form__label{:for => "chat_group_チャットメンバーを追加"} チャットメンバーを追加
     .chat-group-form__field--right
@@ -28,19 +25,12 @@
     .chat-group-form__field--right
 
 
-
       #chat-group-users.js-add-user
         .chat-group-user.clearfix.js-chat-member
-        //11ログイン中のユーザーを追加済みの状態にする
-          %input{name: "group[user_ids][]", type: "hidden", value: current_user.id}
-         //ログインしているユーザーを取得し表示
+          %input{name: "group[user_ids][]", type: "hidden", value: current_user.id}  
           %p.chat-group-user__name= current_user.name
 
-         // 12編集画面では既存のユーザーが追加済みの状態にする
-         //そのグループに属するユーザーの配列をユーザーごとに分解する
-        - group.users.each do |user|   
-
-        //もともと自分は表示されているので、それ以外のユーザーを表示       
+        - group.users.each do |user|
           - if current_user.name != user.name
             .chat-group-user.clearfix.js-chat-member
               %input{name: "group[user_ids][]", type: "hidden", value: user.id}
@@ -54,4 +44,3 @@
     .chat-group-form__field--right
       = f.submit class: 'chat-group-form__action-btn'
 
-      
