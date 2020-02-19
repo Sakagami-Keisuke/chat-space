@@ -51,9 +51,11 @@ $(function(){
 
 
 
+
   let reloadMessages = function () {
 
-    let last_message_id = $('.message:last').data("message-id");        
+    let last_message_id = $('.message:last').data("message-id") || 0;  
+    console.log(last_message_id)      
     if (window.location.href.match(/\/groups\/\d+\/messages/)){          
       
                                                                         
@@ -64,7 +66,8 @@ $(function(){
         data: {last_id: last_message_id},                                 
         contentType: false
       }) 
-      .done(function (messages) {                                 
+      .done(function (messages) {
+                                      
         let insertHTML = '';                                          
         messages.forEach(function (message) {   
           if (message.id > last_message_id) {                      
@@ -74,13 +77,15 @@ $(function(){
           }
         });
       })
-      .fail(function(){
+      .fail(function(){ 
         alert('メッセージの送信を失敗しました');
       });
-    } else {
-      clearInterval(reloadMessages)
-    }
+    } 
+    
   }
     setInterval(reloadMessages, 7000);
 
-});
+    })
+  
+
+  

@@ -44,7 +44,12 @@
     overflow: scroll;
     .message{
       padding: 0 0 40px;
-      color: #000000;
+      color:red;
+      font-family: unset;
+      font-style: italic;
+      font-weight: bold;
+      font-size: 20px;
+
       &__upper-info{
         display: flex;
         margin-bottom: 10px;
