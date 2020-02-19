@@ -21,9 +21,6 @@ class UsersController < ApplicationController
   # 任意のデータベースから任意の条件を指定し、条件に当てはまるレコードを すべて 取得する
 
 
-
-
-
   def edit
   end
 
