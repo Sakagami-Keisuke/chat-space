@@ -24,7 +24,6 @@
         }
       }
     }
-   
    .edit-box{
     height: 40px;
     line-height: 40px;
@@ -43,37 +42,29 @@
     background-color: #fafafa;
     overflow: scroll;
     .message{
-      padding: 0 0 40px;
-      color:red;
-      font-family: unset;
-      font-style: italic;
-      font-weight: bold;
-      font-size: 20px;
-
-      &__upper-info{
-        display: flex;
-        margin-bottom: 10px;
-        &__upper-info__talker{
-          font-size: 16px;
-          color: #434A54;
+      padding-bottom: 40px;
+      .upper-message{
+       display: flex;
+       margin-bottom: 10px;
+        .upper-message__user-name{
+          color: #434a54;
+          font-size: 20px;
+          font-weight: bold;
         }
-        &__upper-info__date{
-          color: #999999;
-          font-size: 12px;
-          margin-left: 12px;
-        }
-        }
-        &__text{
+      }
+      .lower-message{
+        .lower-message__content{
+          color: #434a54;
           font-size: 14px;
-          color: #434A54;
+         margin-bottom: 10px;
         }
+      }  
     }
   }
   .form{
     height: 90px;
     padding: 20px 40px;
     background-color: #d2d2d2;
-
     .new_message{
       display: flex;
       position: relative;
