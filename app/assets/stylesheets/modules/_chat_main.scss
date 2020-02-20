@@ -33,8 +33,6 @@
     position: absolute;
     right: 40px;
     }
-
-
   }
   .messages{
     height: calc(100vh - 190px);
@@ -50,6 +48,11 @@
           color: #434a54;
           font-size: 20px;
           font-weight: bold;
+        }
+        .upper-message__date{
+          color: #999999;
+          font-size: 12px;
+          margin-left: 10px;
         }
       }
       .lower-message{
